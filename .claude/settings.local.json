@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"console.log\\('typescript', require\\('./node_modules/typescript/package.json'\\).version\\)\")",
+      "Bash(node -e \"console.log\\('@types/react', require\\('./node_modules/@types/react/package.json'\\).version\\)\")",
+      "Bash(node -e \"console.log\\('@types/node', require\\('./node_modules/@types/node/package.json'\\).version\\)\")",
+      "Bash(npm ls *)",
+      "Bash(npm view *)"
+    ]
+  }
+}
