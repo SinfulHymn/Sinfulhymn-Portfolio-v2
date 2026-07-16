@@ -16,7 +16,7 @@ const siteMetadata = {
   siteLogo: '',
   image: '/static/images/avatar4.png',
   socialBanner: '',
-  email: 'contact@sinfulhymn.me',
+  email: 'hello@sinfulhymn.me',
   github: 'https://github.com/SinfulHymn',
   X: 'https://x.com/',
   facebook: 'https://facebook.com/sinfulhymn',

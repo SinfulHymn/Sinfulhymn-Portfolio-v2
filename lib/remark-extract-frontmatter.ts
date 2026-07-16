@@ -1,0 +1,16 @@
+import { visit } from 'unist-util-visit'
+import { load } from 'js-yaml'
+import type { Node } from 'unist'
+import type { VFile } from 'vfile'
+
+interface YamlNode extends Node {
+  value: string
+}
+
+export default function extractFrontmatter() {
+  return (tree: Node, file: VFile) => {
+    visit(tree, 'yaml', (node: YamlNode) => {
+      file.data.frontmatter = load(node.value)
+    })
+  }
+}
