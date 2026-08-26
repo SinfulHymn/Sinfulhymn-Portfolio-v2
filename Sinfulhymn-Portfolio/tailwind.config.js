@@ -176,8 +176,8 @@ module.exports = {
         greenAccent: acidGreen[400],
         greenAccentLines: pastelLime[400],
 
-        primaryAccent: acidGreen[400],
-        secondaryAccent: lavender[400],
+        primaryAccent: '#FF2E9A',
+        secondaryAccent: lavender[500],
         secondaryAccentDark: lavender[300],
 
         stormBlueAccent: storm[500],

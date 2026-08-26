@@ -35,12 +35,12 @@ const ButtonCard = ({
 }: ButtonCardProps) => {
   const ref = useRef<HTMLDivElement>(null)
   const [xys, set] = useState<[number, number, number]>([0, 0, 1])
-  const props = useSpring({ xys, config: config.molasses })
+  const props = useSpring({ xys, config: config.stiff })
 
   return (
     <div
       className={`${
-        !onlyImg && mdSize && 'w-full text-secondaryAccent dark:text-secondaryAccentDark md:w-1/4'
+        !onlyImg && mdSize && 'w-full text-secondaryAccent dark:text-secondaryAccentDark'
       } ${className} overflow-hidden`}
       ref={ref}
     >

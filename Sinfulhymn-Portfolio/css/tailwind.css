@@ -9,13 +9,13 @@
  * the pattern color or brightness.
  */
 :root {
-  --topography-light-color: #d2ff7a;
+  --topography-light-color: #ff2e9a;
   --topography-dark-color: #a6ff4d;
 
-  --topography-light-opacity: 0.12;
+  --topography-light-opacity: 0.52;
   --topography-dark-opacity: 0.18;
 
-  --topography-size: 600px;
+  --topography-size: 500px;
 }
 
 .task-list-item::before {

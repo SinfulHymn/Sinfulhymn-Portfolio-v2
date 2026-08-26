@@ -46,7 +46,7 @@ export default function Home({ posts, projects }: InferGetStaticPropsType<typeof
             </p>
           ))}
 
-          <div className="flex w-full flex-wrap gap-2 pt-4 md:gap-10">
+          <div className="grid grid-cols-1 gap-2 pt-4 md:grid-cols-3 md:gap-10">
             <ButtonCard
               title={'About'}
               description={'About me'}
