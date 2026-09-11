@@ -63,7 +63,7 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
         </header>
       )}
       <SectionContainer>
-        <main className="py-10">{children}</main>
+        <main className={isHome ? 'pb-10 pt-6' : 'py-10'}>{children}</main>
         <Footer />
       </SectionContainer>
     </>

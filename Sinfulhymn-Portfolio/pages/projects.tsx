@@ -19,7 +19,7 @@ export default function Projects() {
           Under construction.
         </div>
       )}
-      <div className="grid grid-cols-1 gap-10 py-10 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 py-10 md:grid-cols-2">
         {projectsData.map((d) => (
           <Card
             key={d.title}

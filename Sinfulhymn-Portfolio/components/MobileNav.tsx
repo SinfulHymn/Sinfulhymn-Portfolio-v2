@@ -21,7 +21,7 @@ const MobileNav = () => {
     <div className="sm:hidden">
       <button
         type="button"
-        className="ml-1 mr-1 h-8 w-8 rounded py-1"
+        className="flex h-8 w-8 items-center justify-center text-primaryText dark:text-fgTextDark"
         aria-label="Toggle Menu"
         onClick={onToggleNav}
       >
@@ -29,7 +29,7 @@ const MobileNav = () => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="text-gray-900 dark:text-gray-100"
+          className="h-5 w-5"
         >
           <path
             fillRule="evenodd"
@@ -39,22 +39,23 @@ const MobileNav = () => {
         </svg>
       </button>
       <div
-        className={`fixed top-0 left-0 z-10 h-full w-full transform bg-gray-200 opacity-95 duration-300 ease-in-out dark:bg-gray-800 ${
+        className={`fixed inset-0 z-30 transform bg-whiteBackground duration-300 ease-in-out dark:bg-purpleBackground ${
           navShow ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex justify-end">
+        <div className="hairline flex items-center justify-between border-b px-6 py-5">
+          <span className="apparatus text-secondaryText dark:text-fgMutedDark">Menu</span>
           <button
             type="button"
-            className="mr-5 mt-11 h-8 w-8 rounded"
-            aria-label="Toggle Menu"
+            className="flex h-8 w-8 items-center justify-center text-primaryText dark:text-fgTextDark"
+            aria-label="Close Menu"
             onClick={onToggleNav}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="text-gray-900 dark:text-gray-100"
+              className="h-5 w-5"
             >
               <path
                 fillRule="evenodd"
@@ -64,17 +65,17 @@ const MobileNav = () => {
             </svg>
           </button>
         </div>
-        <nav className="fixed mt-8 h-full">
+        <nav className="flex flex-col px-6">
           {headerNavLinks.map((link) => (
-            <div key={link.title} className="px-12 py-4">
-              <Link
-                href={link.href}
-                className="text-2xl font-bold tracking-widest text-secondaryAccent dark:text-secondaryAccentDark"
-                onClick={onToggleNav}
-              >
-                {link.title}
-              </Link>
-            </div>
+            <Link
+              key={link.title}
+              href={link.href}
+              className="hairline border-b py-5 font-display text-2xl text-primaryText dark:text-fgTextDark"
+              onClick={onToggleNav}
+            >
+              <span className="mr-2 text-secondaryAccent dark:text-secondaryAccentDark">$</span>
+              {link.title}
+            </Link>
           ))}
         </nav>
       </div>

@@ -45,72 +45,74 @@ export default function AuthorLayout({ children, frontMatter }: AuthorLayoutProp
   return (
     <>
       <PageSEO title={`About - ${name}`} description={`About me - ${name}`} />
-      <div className="mx-auto max-w-3xl pt-4">
-        <div className="apparatus inline-flex items-center gap-2 rounded-t-md border border-b-0 border-mutedLight bg-surfaceAlt px-3 py-1.5 text-secondaryText dark:border-borderDark dark:bg-surfaceAltDark dark:text-fgMutedDark">
-          <span className="text-secondaryAccent dark:text-secondaryAccentDark">$</span>
-          {handle}@localhost: ~/whoami
-        </div>
-
-        <div className="man-glow hairline space-y-8 rounded-b-md rounded-tr-md border bg-surface p-6 dark:bg-surfaceDark sm:p-10">
-          <div className="hairline space-y-1 border-b pb-6 text-center">
-            <div className="font-display text-lg tracking-[0.1em] text-primaryText dark:text-white">
-              WHOAMI(1)
-            </div>
-            <div className="apparatus text-secondaryText dark:text-fgMutedDark">
-              User Commands &middot; WHOAMI(1)
-            </div>
+      <div className="mx-auto max-w-4xl pt-4 xl:flex xl:items-start xl:gap-10">
+        <div className="min-w-0 flex-1">
+          <div className="apparatus inline-flex items-center gap-2 rounded-t-md border border-b-0 border-mutedLight bg-surfaceAlt px-3 py-1.5 text-secondaryText dark:border-borderDark dark:bg-surfaceAltDark dark:text-fgMutedDark">
+            <span className="text-secondaryAccent dark:text-secondaryAccentDark">$</span>
+            {handle}@localhost: ~/whoami
           </div>
 
-          <ManSection label="Name">
-            <p>
-              <code className="text-secondaryAccent dark:text-secondaryAccentDark">whoami</code> —{' '}
-              {name}
-              {occupation && ` || [${occupation}]`}
-            </p>
-          </ManSection>
+          <div className="man-glow hairline space-y-8 rounded-b-md rounded-tr-md border bg-surface p-6 dark:bg-surfaceDark sm:p-10">
+            <div className="hairline space-y-1 border-b pb-6 text-center">
+              <div className="font-display text-lg tracking-[0.1em] text-primaryText dark:text-white">
+                WHOAMI(1)
+              </div>
+              <div className="apparatus text-secondaryText dark:text-fgMutedDark">
+                User Commands &middot; WHOAMI(1)
+              </div>
+            </div>
 
-          <ManSection label="Synopsis">
-            <p>
-              <code className="text-secondaryAccent dark:text-secondaryAccentDark">whoami</code>{' '}
-              [--background] [--stack] [--contact] [--help]
-            </p>
-          </ManSection>
-
-          {company && (
-            <ManSection label="Description">
-              <p>{company}</p>
+            <ManSection label="Name">
+              <p>
+                <code className="text-secondaryAccent dark:text-secondaryAccentDark">whoami</code> —{' '}
+                {name}
+                {occupation && ` || [${occupation}]`}
+              </p>
             </ManSection>
-          )}
 
-          <ManSection label="Background">
-            <div className="prose max-w-none dark:prose-dark">{children}</div>
-          </ManSection>
+            <ManSection label="Synopsis">
+              <p>
+                <code className="text-secondaryAccent dark:text-secondaryAccentDark">whoami</code>{' '}
+                [--background] [--stack] [--contact] [--help]
+              </p>
+            </ManSection>
 
-          <div className="hairline space-y-3 border-t pt-6">
-            <div className="apparatus text-secondaryText dark:text-fgMutedDark">Options</div>
-            <div className="space-y-2">
-              {email && <Opt name="--contact" desc={email} />}
-              {github && <Opt name="--github" desc={stripProtocol(github)} />}
-              {linkedin && <Opt name="--linkedin" desc={stripProtocol(linkedin)} />}
+            {company && (
+              <ManSection label="Description">
+                <p>{company}</p>
+              </ManSection>
+            )}
+
+            <ManSection label="Background">
+              <div className="prose max-w-none dark:prose-dark">{children}</div>
+            </ManSection>
+
+            <div className="hairline space-y-3 border-t pt-6">
+              <div className="apparatus text-secondaryText dark:text-fgMutedDark">Options</div>
+              <div className="space-y-2">
+                {email && <Opt name="--contact" desc={email} />}
+                {github && <Opt name="--github" desc={stripProtocol(github)} />}
+                {linkedin && <Opt name="--linkedin" desc={stripProtocol(linkedin)} />}
+              </div>
             </div>
-          </div>
 
-          <div className="hairline flex items-center justify-between border-t pt-6">
-            <div className="flex gap-4">
-              <SocialIcon kind="mail" href={`mailto:${email}`} />
-              <SocialIcon kind="linkedin" href={linkedin} />
-              <SocialIcon kind="github" href={github} />
+            <div className="hairline flex items-center justify-between border-t pt-6">
+              <div className="flex gap-4">
+                <SocialIcon kind="mail" href={`mailto:${email}`} />
+                <SocialIcon kind="linkedin" href={linkedin} />
+                <SocialIcon kind="github" href={github} />
+              </div>
+              <span
+                className="cursor text-secondaryAccent dark:text-secondaryAccentDark"
+                aria-hidden
+              />
             </div>
-            <span
-              className="cursor text-secondaryAccent dark:text-secondaryAccentDark"
-              aria-hidden
-            />
           </div>
         </div>
 
         {avatar && (
-          <div className="relative mt-8 max-w-xs">
-            <div className="apparatus absolute -top-[26px] left-4 rounded-t-md border border-b-0 border-mutedLight bg-surfaceAlt px-3 py-1.5 text-secondaryText dark:border-borderDark dark:bg-surfaceAltDark dark:text-fgMutedDark">
+          <div className="relative mt-8 w-full max-w-xs flex-none xl:mt-0 xl:w-64 xl:pt-6">
+            <div className="apparatus absolute -top-[26px] left-4 rounded-t-md border border-b-0 border-mutedLight bg-surfaceAlt px-3 py-1.5 text-secondaryText dark:border-borderDark dark:bg-surfaceAltDark dark:text-fgMutedDark xl:top-0">
               <span className="text-secondaryAccent dark:text-secondaryAccentDark">$_</span>
               avatar
             </div>
