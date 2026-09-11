@@ -6,8 +6,6 @@ import { getAllFilesFrontMatter } from '@/lib/mdx'
 import formatDate from '@/lib/utils/formatDate'
 import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
-import NewsletterForm from '@/components/NewsletterForm'
-import ButtonCard from '@/components/ButtonCard'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import type { Frontmatter } from '@/lib/mdx'
 import type { Project } from '@/data/projectsData'
@@ -23,160 +21,97 @@ export const getStaticProps: GetStaticProps<{
   return { props: { posts, projects } }
 }
 
-const notFound = () => {
-  return <div className="py-4">Under Construction</div>
-}
-const noProjects = () => {
-  return <div className="py-4">Under Construction</div>
-}
-
 export default function Home({ posts, projects }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
-      <div className="nothing">
-        <div className="space-y-2 py-8 md:space-y-5">
-          {/* <h1 className="font-bold leading-9 tracking-tight text-primaryText dark:text-white sm:text-2xl sm:leading-10 md:text-4xl md:leading-5">
-            I'm
-            <span className=" text-secondaryAccent dark:text-secondaryAccentDark"> SinfulHymn</span>
-          </h1> */}
-          {siteMetadata.description.split('\n\n').map((paragraph, idx) => (
-            <p className="text-primaryText dark:text-white" key={idx}>
-              {paragraph}
-            </p>
-          ))}
 
-          <div className="grid grid-cols-1 gap-2 pt-4 md:grid-cols-3 md:gap-10">
-            <ButtonCard
-              title={'About'}
-              description={'About me'}
-              href={'/about'}
-              className="py-4 md:px-2"
-            />
-            <ButtonCard
-              title={'Blog'}
-              description={'My blog posts'}
-              href={'/blog'}
-              className="py-4 md:px-2"
-            />
-            <ButtonCard
-              title={'Projects'}
-              description={'Old projects'}
-              href={'/projects'}
-              className="py-4 md:px-2"
-            />
-          </div>
-        </div>
-
-        <div></div>
-
-        <div className="py-2">
-          <div className="flex items-center justify-between py-2 text-2xl font-semibold">
-            <div>Recent Projects</div>
-            {projectsData.length > MAX_DISPLAY && (
-              <div className="flex justify-end text-base font-medium leading-8">
-                <Link
-                  href="/projects"
-                  className="text-secondaryAccent hover:text-secondaryAccentDark dark:text-secondaryAccentDark dark:hover:text-primaryAccent"
-                  aria-label="all posts"
-                >
-                  All Projects &rarr;
-                </Link>
-              </div>
-            )}
-          </div>
-          {!projectsData.length && noProjects()}
-          <div className="grid grid-cols-1 gap-4 py-4 md:grid-cols-2 xl:grid-cols-2">
-            {projectsData.slice(0, 4).map((d) => (
-              <Card
-                key={d.title}
-                title={d.title}
-                description={d.description}
-                imgSrc={d.imgSrc}
-                href={d.href}
-                tags={d.tags}
-                repo={d.repo}
-              />
-            ))}
-          </div>
-          {projectsData.length > MAX_DISPLAY && (
-            <div className="flex justify-end text-base font-medium leading-8">
-              <Link
-                href="/projects"
-                className="text-primaryAccent hover:text-secondaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
-                aria-label="all posts"
-              >
-                All Projects &rarr;
-              </Link>
-            </div>
+      <section className="hairline space-y-6 border-b pb-10">
+        <div className="flex items-center justify-between">
+          <h2 className="apparatus text-secondaryText dark:text-fgMutedDark">Recent Projects</h2>
+          {projects.length > MAX_DISPLAY && (
+            <Link
+              href="/projects"
+              className="nav-link apparatus text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
+            >
+              All Projects &rarr;
+            </Link>
           )}
         </div>
-        <div className="py-2">
-          <div className="py-2 text-2xl font-semibold">Recent Posts</div>
-          <ul className="">
-            {!posts.length && notFound()}
-            {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
-              const { slug, date, title, summary, tags } = frontMatter
-              return (
-                <li key={slug as string} className="py-4">
-                  <article>
-                    <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                      <dl>
-                        <dt className="sr-only">Published on</dt>
-                        <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                          <time dateTime={date as string}>{formatDate(date as string)}</time>
-                        </dd>
-                      </dl>
-                      <div className="space-y-5 xl:col-span-3">
-                        <div className="space-y-2">
-                          <div>
-                            <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                              <Link
-                                href={`/blog/${slug}`}
-                                className="text-gray-900 dark:text-gray-100"
-                              >
-                                {title as string}
-                              </Link>
-                            </h2>
-                            <div className="flex flex-wrap py-2">
-                              {(tags as string[]).map((tag) => (
-                                <Tag key={tag} text={tag} />
-                              ))}
-                            </div>
-                          </div>
-                          <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                            {summary as string}
-                          </div>
-                        </div>
-                        <div className="text-base font-medium leading-6">
-                          <Link
-                            href={`/blog/${slug}`}
-                            className="text-primaryAccent hover:text-secondaryAccent dark:text-secondaryAccent dark:hover:text-primaryAccent"
-                            aria-label={`Read "${title}"`}
-                          >
-                            Read more &rarr;
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                </li>
-              )
-            })}
-          </ul>
+        {!projects.length && (
+          <div className="apparatus text-secondaryText dark:text-fgMutedDark">
+            Under construction.
+          </div>
+        )}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {projects.slice(0, 4).map((d) => (
+            <Card
+              key={d.title}
+              title={d.title}
+              description={d.description}
+              imgSrc={d.imgSrc}
+              href={d.href}
+              repo={d.repo}
+              date={d.date}
+              tags={d.tags}
+            />
+          ))}
         </div>
-      </div>
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primaryAccent hover:text-secondaryAccent dark:text-secondaryAccent dark:hover:text-primaryAccent"
-            aria-label="all posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
+      </section>
+
+      <section className="space-y-6 pt-10">
+        <h2 className="apparatus text-secondaryText dark:text-fgMutedDark">Recent Posts</h2>
+        {!posts.length && (
+          <div className="apparatus text-secondaryText dark:text-fgMutedDark">
+            Under construction.
+          </div>
+        )}
+        <ul>
+          {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
+            const { slug, date, title, summary, tags } = frontMatter
+            return (
+              <li key={slug as string} className="hairline border-b py-6 first:pt-0">
+                <article className="space-y-2">
+                  <div className="apparatus text-secondaryText dark:text-fgMutedDark">
+                    <time dateTime={date as string}>{formatDate(date as string)}</time>
+                  </div>
+                  <h3 className="font-display text-2xl leading-snug tracking-tight">
+                    <Link href={`/blog/${slug}`} className="text-primaryText dark:text-fgTextDark">
+                      {title as string}
+                    </Link>
+                  </h3>
+                  <div className="flex flex-wrap">
+                    {(tags as string[]).map((tag) => (
+                      <Tag key={tag} text={tag} />
+                    ))}
+                  </div>
+                  <div className="prose max-w-none text-secondaryText dark:text-fgMutedDark">
+                    {summary as string}
+                  </div>
+                  <Link
+                    href={`/blog/${slug}`}
+                    className="nav-link apparatus text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
+                    aria-label={`Read "${title}"`}
+                  >
+                    Read more &rarr;
+                  </Link>
+                </article>
+              </li>
+            )
+          })}
+        </ul>
+        {posts.length > MAX_DISPLAY && (
+          <div className="flex justify-end">
+            <Link
+              href="/blog"
+              className="nav-link apparatus text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
+              aria-label="all posts"
+            >
+              All Posts &rarr;
+            </Link>
+          </div>
+        )}
+      </section>
     </>
   )
 }

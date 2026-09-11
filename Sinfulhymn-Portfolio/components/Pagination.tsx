@@ -10,30 +10,32 @@ export default function Pagination({ totalPages, currentPage }: PaginationProps)
   const nextPage = parseInt(currentPage.toString()) + 1 <= parseInt(totalPages.toString())
 
   return (
-    <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-      <nav className="flex justify-between">
-        {!prevPage && (
-          <button rel="previous" className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
-            Previous
-          </button>
-        )}
-        {prevPage && (
-          <Link href={currentPage - 1 === 1 ? `/blog/` : `/blog/page/${currentPage - 1}`}>
-            <button rel="previous">Previous</button>
+    <div className="hairline mt-8 border-t pt-6">
+      <nav className="apparatus flex items-center justify-between text-secondaryText dark:text-fgMutedDark">
+        {prevPage ? (
+          <Link
+            href={currentPage - 1 === 1 ? `/blog/` : `/blog/page/${currentPage - 1}`}
+            className="nav-link text-primaryText dark:text-fgTextDark"
+            rel="previous"
+          >
+            &larr; Previous
           </Link>
+        ) : (
+          <span className="cursor-default opacity-40">&larr; Previous</span>
         )}
         <span>
           {currentPage} of {totalPages}
         </span>
-        {!nextPage && (
-          <button rel="next" className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
-            Next
-          </button>
-        )}
-        {nextPage && (
-          <Link href={`/blog/page/${currentPage + 1}`}>
-            <button rel="next">Next</button>
+        {nextPage ? (
+          <Link
+            href={`/blog/page/${currentPage + 1}`}
+            className="nav-link text-primaryText dark:text-fgTextDark"
+            rel="next"
+          >
+            Next &rarr;
           </Link>
+        ) : (
+          <span className="cursor-default opacity-40">Next &rarr;</span>
         )}
       </nav>
     </div>

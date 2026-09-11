@@ -99,26 +99,12 @@ module.exports = {
         14: '3.5rem',
       },
 
-      backgroundImage: {
-        'texture-pattern': "url('/static/images/right-dark-gradient.svg')",
-
-        'soft-terminal-glow':
-          'radial-gradient(circle at top, rgba(166, 255, 77, 0.14), transparent 42%)',
-
-        'storm-glow':
-          'radial-gradient(circle at top right, rgba(118, 179, 208, 0.18), transparent 45%)',
-      },
-
       fontFamily: {
-        sans: ['Be Vietnam Pro', ...defaultTheme.fontFamily.sans],
+        sans: [...defaultTheme.fontFamily.sans],
 
-        t26: ['t26-carbon', 'monospace'],
+        mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
 
-        mono: [
-          'JetBrains Mono',
-          'IBM Plex Mono',
-          ...defaultTheme.fontFamily.mono,
-        ],
+        display: ['var(--font-share-tech-mono)', ...defaultTheme.fontFamily.mono],
       },
 
       colors: {
@@ -180,23 +166,7 @@ module.exports = {
         secondaryAccent: lavender[500],
         secondaryAccentDark: lavender[300],
 
-        stormBlueAccent: storm[500],
-        cyanGrayAccent: storm[400],
-
-        softMint: pastelLime[300],
         neonblush: blush[400],
-
-        warningAccent: '#E1FF8A',
-        warmHighlightAccent: '#F1FFAE',
-
-        warmHighlight: '#F4BFA3',
-        highlight: '#F4BFA3',
-        highlightLight: '#FFD19A',
-
-        // Legacy compatibility aliases
-        primaryTexts: blush[500],
-        primaryLight: storm[500],
-        primaryDark: acidGreen[300],
 
         violet: {
           ...colors.violet,
@@ -206,17 +176,6 @@ module.exports = {
         },
 
         gray: colors.neutral,
-      },
-
-      boxShadow: {
-        'acid-soft': '0 0 24px rgba(166, 255, 77, 0.18)',
-
-        'acid-hover': '0 0 34px rgba(166, 255, 77, 0.32)',
-
-        'acid-strong':
-          '0 0 12px rgba(166, 255, 77, 0.35), 0 0 38px rgba(166, 255, 77, 0.20)',
-
-        'storm-soft': '0 12px 40px rgba(24, 42, 54, 0.28)',
       },
 
       typography: (theme) => ({

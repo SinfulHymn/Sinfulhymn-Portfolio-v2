@@ -1,6 +1,6 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
+import PageTitle from '@/components/PageTitle'
 import { useState } from 'react'
 import Pagination from '@/components/Pagination'
 import formatDate from '@/lib/utils/formatDate'
@@ -39,71 +39,64 @@ export default function ListLayout({
 
   return (
     <>
-      <div className="">
-        <div className="space-y-2 py-4 md:space-y-5">
-          <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-secondaryAccent dark:text-gray-100 sm:text-2xl sm:leading-10 md:text-3xl md:leading-5">
-            {title}
-          </h1>
-          <div className="relative max-w-lg">
-            <input
-              aria-label="Search articles"
-              type="text"
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Search articles"
-              className="block w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-900 focus:border-primaryAccent focus:ring-primaryAccent dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+      <div className="hairline space-y-4 border-b pb-6">
+        <PageTitle>{title}</PageTitle>
+        <div className="relative max-w-lg">
+          <input
+            aria-label="Search articles"
+            type="text"
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="Search articles"
+            className="hairline block w-full rounded-md border bg-transparent px-4 py-2 font-mono text-sm text-primaryText focus:border-primaryAccent focus:outline-none dark:text-fgTextDark"
+          />
+          <svg
+            className="absolute right-3 top-3 h-4 w-4 text-secondaryText dark:text-fgMutedDark"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
-            <svg
-              className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
+          </svg>
         </div>
-        <ul>
-          {!filteredBlogPosts.length && 'No posts found.'}
-          {displayPosts.map((frontMatter) => {
-            const { slug, date, title, summary, tags } = frontMatter
-            return (
-              <li key={slug as string} className="py-4">
-                <article className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                  <dl>
-                    <dt className="sr-only">Published on</dt>
-                    <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                      <time dateTime={date as string}>{formatDate(date as string)}</time>
-                    </dd>
-                  </dl>
-                  <div className="space-y-3 xl:col-span-3">
-                    <div>
-                      <h3 className="text-2xl font-bold leading-8 tracking-tight">
-                        <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
-                          {title as string}
-                        </Link>
-                      </h3>
-                      <div className="flex flex-wrap">
-                        {(tags as string[]).map((tag) => (
-                          <Tag key={tag} text={tag} />
-                        ))}
-                      </div>
-                    </div>
-                    <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                      {summary as string}
-                    </div>
-                  </div>
-                </article>
-              </li>
-            )
-          })}
-        </ul>
       </div>
+      <ul>
+        {!filteredBlogPosts.length && (
+          <li className="apparatus py-6 text-secondaryText dark:text-fgMutedDark">
+            No posts found.
+          </li>
+        )}
+        {displayPosts.map((frontMatter) => {
+          const { slug, date, title, summary, tags } = frontMatter
+          return (
+            <li key={slug as string} className="hairline border-b py-6">
+              <article className="space-y-2">
+                <div className="apparatus text-secondaryText dark:text-fgMutedDark">
+                  <time dateTime={date as string}>{formatDate(date as string)}</time>
+                </div>
+                <h3 className="font-display text-2xl leading-snug tracking-tight">
+                  <Link href={`/blog/${slug}`} className="text-primaryText dark:text-fgTextDark">
+                    {title as string}
+                  </Link>
+                </h3>
+                <div className="flex flex-wrap">
+                  {(tags as string[]).map((tag) => (
+                    <Tag key={tag} text={tag} />
+                  ))}
+                </div>
+                <div className="prose max-w-none text-secondaryText dark:text-fgMutedDark">
+                  {summary as string}
+                </div>
+              </article>
+            </li>
+          )
+        })}
+      </ul>
       {pagination && pagination.totalPages > 1 && !searchValue && (
         <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
       )}

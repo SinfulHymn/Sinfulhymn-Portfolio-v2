@@ -1,6 +1,7 @@
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
 import { PageSEO } from '@/components/SEO'
+import siteMetadata from '@/data/siteMetadata'
 import type { Frontmatter } from '@/lib/mdx'
 import type { ReactNode } from 'react'
 
@@ -21,42 +22,109 @@ interface AuthorLayoutProps {
   frontMatter: AuthorFrontmatter
 }
 
+const ManSection = ({ label, children }: { label: string; children: ReactNode }) => (
+  <div className="grid grid-cols-1 gap-2 sm:grid-cols-[8rem_1fr] sm:gap-6">
+    <div className="apparatus text-secondaryAccent dark:text-secondaryAccentDark">{label}</div>
+    <div className="text-primaryText dark:text-white">{children}</div>
+  </div>
+)
+
+const Opt = ({ name, desc }: { name: string; desc: string }) => (
+  <div className="grid grid-cols-1 gap-1 font-mono text-sm sm:grid-cols-[10rem_1fr] sm:gap-4">
+    <span className="text-secondaryAccent dark:text-secondaryAccentDark">{name}</span>
+    <span className="break-all text-secondaryText dark:text-fgMutedDark">{desc}</span>
+  </div>
+)
+
+const stripProtocol = (url: string) => url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+
 export default function AuthorLayout({ children, frontMatter }: AuthorLayoutProps) {
-  const { name, avatar, occupation, company, email, X, linkedin, github, instagram } = frontMatter
+  const { name, avatar, occupation, company, email, linkedin, github } = frontMatter
+  const handle = (siteMetadata.headerTitle as string).toLowerCase()
 
   return (
     <>
       <PageSEO title={`About - ${name}`} description={`About me - ${name}`} />
-      <div className="divide-y divide-secondaryAccent dark:divide-greenAccent">
-        <div className="space-y-2 pt-2 pb-2 md:space-y-5">
-          <h1 className="text-2xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl sm:leading-10 md:text-2xl md:leading-10">
-            About
-          </h1>
+      <div className="mx-auto max-w-3xl pt-4">
+        <div className="apparatus inline-flex items-center gap-2 rounded-t-md border border-b-0 border-mutedLight bg-surfaceAlt px-3 py-1.5 text-secondaryText dark:border-borderDark dark:bg-surfaceAltDark dark:text-fgMutedDark">
+          <span className="text-secondaryAccent dark:text-secondaryAccentDark">$</span>
+          {handle}@localhost: ~/whoami
         </div>
-        <div className="items-start space-y-2 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:space-y-0">
-          <div className="flex flex-col items-center pt-8">
-            <Image
-              src={avatar as string}
-              alt="avatar"
-              width="192"
-              height="192"
-              className="h-48 w-48 rounded-full object-cover object-[50%_10%]"
-            />
-            <h3 className="pt-4 pb-2 text-2xl font-bold leading-4 tracking-tight text-secondaryAccent dark:text-secondaryAccentDark">
+
+        <div className="man-glow hairline space-y-8 rounded-b-md rounded-tr-md border bg-surface p-6 dark:bg-surfaceDark sm:p-10">
+          <div className="hairline space-y-1 border-b pb-6 text-center">
+            <div className="font-display text-lg tracking-[0.1em] text-primaryText dark:text-white">
+              WHOAMI(1)
+            </div>
+            <div className="apparatus text-secondaryText dark:text-fgMutedDark">
+              User Commands &middot; WHOAMI(1)
+            </div>
+          </div>
+
+          <ManSection label="Name">
+            <p>
+              <code className="text-secondaryAccent dark:text-secondaryAccentDark">whoami</code> —{' '}
               {name}
-            </h3>
-            <div className="text-black dark:text-white">{occupation}</div>
-            <div className="text-black dark:text-white">{company}</div>
-            <div className="flex space-x-5 pt-6">
+              {occupation && ` || [${occupation}]`}
+            </p>
+          </ManSection>
+
+          <ManSection label="Synopsis">
+            <p>
+              <code className="text-secondaryAccent dark:text-secondaryAccentDark">whoami</code>{' '}
+              [--background] [--stack] [--contact] [--help]
+            </p>
+          </ManSection>
+
+          {company && (
+            <ManSection label="Description">
+              <p>{company}</p>
+            </ManSection>
+          )}
+
+          <ManSection label="Background">
+            <div className="prose max-w-none dark:prose-dark">{children}</div>
+          </ManSection>
+
+          <div className="hairline space-y-3 border-t pt-6">
+            <div className="apparatus text-secondaryText dark:text-fgMutedDark">Options</div>
+            <div className="space-y-2">
+              {email && <Opt name="--contact" desc={email} />}
+              {github && <Opt name="--github" desc={stripProtocol(github)} />}
+              {linkedin && <Opt name="--linkedin" desc={stripProtocol(linkedin)} />}
+            </div>
+          </div>
+
+          <div className="hairline flex items-center justify-between border-t pt-6">
+            <div className="flex gap-4">
               <SocialIcon kind="mail" href={`mailto:${email}`} />
               <SocialIcon kind="linkedin" href={linkedin} />
               <SocialIcon kind="github" href={github} />
             </div>
-          </div>
-          <div className="prose max-w-none space-y-6 pt-6 pb-6 text-black dark:prose-dark dark:text-white xl:col-span-2">
-            {children}
+            <span
+              className="cursor text-secondaryAccent dark:text-secondaryAccentDark"
+              aria-hidden
+            />
           </div>
         </div>
+
+        {avatar && (
+          <div className="relative mt-8 max-w-xs">
+            <div className="apparatus absolute -top-[26px] left-4 rounded-t-md border border-b-0 border-mutedLight bg-surfaceAlt px-3 py-1.5 text-secondaryText dark:border-borderDark dark:bg-surfaceAltDark dark:text-fgMutedDark">
+              <span className="text-secondaryAccent dark:text-secondaryAccentDark">$_</span>
+              avatar
+            </div>
+            <div className="hairline overflow-hidden rounded-b-md rounded-tr-md border">
+              <Image
+                src={avatar}
+                alt="avatar"
+                width="440"
+                height="440"
+                className="aspect-square w-full object-cover object-[50%_10%]"
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   )

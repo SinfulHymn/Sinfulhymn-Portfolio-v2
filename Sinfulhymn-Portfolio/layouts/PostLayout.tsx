@@ -37,7 +37,7 @@ export default function PostLayout({
   prev,
   children,
 }: PostLayoutProps) {
-  const { slug, fileName, date, title, images, tags } = frontMatter
+  const { slug, fileName, date, title, tags } = frontMatter
 
   return (
     <SectionContainer>
@@ -48,129 +48,103 @@ export default function PostLayout({
       />
       <ScrollTopAndComment />
       <article>
-        <div className="xl:divide-y xl:divide-primaryAccent xl:dark:divide-secondaryAccent">
-          <header className="pt-6 xl:pb-6">
-            <div className="space-y-1 text-center">
-              <dl className="space-y-10">
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date as string}>
-                      {new Date(date as string).toLocaleDateString(
-                        siteMetadata.locale,
-                        postDateTemplate
-                      )}
-                    </time>
-                  </dd>
-                </div>
-              </dl>
-              <div>
-                <PageTitle>{title as string}</PageTitle>
-              </div>
-            </div>
-          </header>
-          <div
-            className="divide-y divide-primaryAccent pb-8 dark:divide-secondaryAccent xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
-            style={{ gridTemplateRows: 'auto 1fr' }}
-          >
-            <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
-              <dt className="sr-only">Authors</dt>
-              <dd>
-                <ul className="flex justify-center space-x-8 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
-                  {authorDetails.map((author) => (
-                    <li className="flex items-center space-x-2" key={author.name as string}>
-                      {author.avatar && (
-                        <Image
-                          src={author.avatar as string}
-                          width="38"
-                          height="38"
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
-                      )}
-                      <dl className="whitespace-nowrap text-sm font-medium leading-5">
-                        <dt className="sr-only">Name</dt>
-                        <dd className="text-gray-900 dark:text-gray-100">
-                          {author.name as string}
-                        </dd>
-                        <dt className="sr-only">X</dt>
-                        <dd>
-                          {author.X && (
-                            <Link
-                              href={author.X as string}
-                              className="dark:hover:text-primary-400·text-primaryAccent·hover:text-secondaryAccent"
-                            >
-                              {(author.X as string).replace('https://X.com/', '@')}
-                            </Link>
-                          )}
-                        </dd>
-                      </dl>
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </dl>
-            <div className="divide-y divide-primaryAccent dark:divide-secondaryAccent xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
-              <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(slug as string)} rel="nofollow">
-                  {'Discuss on X'}
-                </Link>
-                {` • `}
-                <Link href={editUrl(fileName as string)}>{'View on GitHub'}</Link>
-              </div>
-              <Comments frontMatter={frontMatter} />
-            </div>
-            <footer>
-              <div className="divide-primaryAccent text-sm font-medium leading-5 dark:divide-secondaryAccent xl:col-start-1 xl:row-start-2 xl:divide-y">
-                {tags && (
-                  <div className="py-4 xl:py-8">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      Tags
-                    </h2>
-                    <div className="flex flex-wrap">
-                      {(tags as string[]).map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {(next || prev) && (
-                  <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          Previous Article
-                        </h2>
-                        <div className="dark:hover:text-primary-400·text-primaryAccent·hover:text-secondaryAccent">
-                          <Link href={`/blog/${prev.slug}`}>{prev.title as string}</Link>
-                        </div>
-                      </div>
-                    )}
-                    {next && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          Next Article
-                        </h2>
-                        <div className="dark:hover:text-primary-400·text-primaryAccent·hover:text-secondaryAccent">
-                          <Link href={`/blog/${next.slug}`}>{next.title as string}</Link>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="pt-4 xl:pt-8">
-                <Link
-                  href="/blog"
-                  className="dark:hover:text-primary-400·text-primaryAccent·hover:text-secondaryAccent"
-                >
-                  &larr; Back to the blog
-                </Link>
-              </div>
-            </footer>
+        <header className="hairline space-y-4 border-b pb-8 pt-6">
+          <div className="apparatus text-secondaryText dark:text-fgMutedDark">
+            <time dateTime={date as string}>
+              {new Date(date as string).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+            </time>
           </div>
+          <PageTitle>{title as string}</PageTitle>
+          <ul className="flex flex-wrap items-center gap-6">
+            {authorDetails.map((author) => (
+              <li className="flex items-center gap-2" key={author.name as string}>
+                {author.avatar && (
+                  <Image
+                    src={author.avatar as string}
+                    width="32"
+                    height="32"
+                    alt="avatar"
+                    className="h-8 w-8 rounded-full"
+                  />
+                )}
+                <span className="apparatus text-primaryText dark:text-fgTextDark">
+                  {author.name as string}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </header>
+
+        <div className="prose max-w-none pb-8 pt-10 dark:prose-dark">{children}</div>
+
+        <div className="hairline flex flex-wrap gap-x-4 border-t py-6">
+          <Link
+            href={discussUrl(slug as string)}
+            rel="nofollow"
+            className="nav-link apparatus text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
+          >
+            Discuss on X
+          </Link>
+          <Link
+            href={editUrl(fileName as string)}
+            className="nav-link apparatus text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
+          >
+            View on GitHub
+          </Link>
         </div>
+
+        <Comments frontMatter={frontMatter} />
+
+        <footer className="hairline space-y-6 border-t pt-6">
+          {tags && (
+            <div>
+              <h2 className="apparatus mb-2 text-secondaryText dark:text-fgMutedDark">Tags</h2>
+              <div className="flex flex-wrap">
+                {(tags as string[]).map((tag) => (
+                  <Tag key={tag} text={tag} />
+                ))}
+              </div>
+            </div>
+          )}
+          {(next || prev) && (
+            <div className="flex flex-wrap justify-between gap-6">
+              {prev && (
+                <div>
+                  <h2 className="apparatus mb-1 text-secondaryText dark:text-fgMutedDark">
+                    Previous Article
+                  </h2>
+                  <Link
+                    href={`/blog/${prev.slug}`}
+                    className="nav-link font-display text-lg text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
+                  >
+                    {prev.title as string}
+                  </Link>
+                </div>
+              )}
+              {next && (
+                <div className="text-right">
+                  <h2 className="apparatus mb-1 text-secondaryText dark:text-fgMutedDark">
+                    Next Article
+                  </h2>
+                  <Link
+                    href={`/blog/${next.slug}`}
+                    className="nav-link font-display text-lg text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
+                  >
+                    {next.title as string}
+                  </Link>
+                </div>
+              )}
+            </div>
+          )}
+          <div>
+            <Link
+              href="/blog"
+              className="nav-link apparatus text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
+            >
+              &larr; Back to the blog
+            </Link>
+          </div>
+        </footer>
       </article>
     </SectionContainer>
   )

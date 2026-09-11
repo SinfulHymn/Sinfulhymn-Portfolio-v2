@@ -14,7 +14,7 @@ const siteMetadata = {
   siteUrl: 'https://www.sinfulhymn.me/',
   siteRepo: 'https://github.com/Kmachappy/sinfulhymn-portfolio',
   siteLogo: '',
-  image: '/static/images/avatar4.png',
+  image: '/static/images/main_photo.jpg',
   socialBanner: '',
   email: 'hello@sinfulhymn.me',
   github: 'https://github.com/SinfulHymn',
@@ -35,16 +35,13 @@ const siteMetadata = {
     posthogAnalyticsId: '', // posthog.init e.g. phc_5yXvArzvRdqtZIsHkEm3Fkkhm3d0bEYUXCaFISzqPSQ
   },
   newsletter: {
-    // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
     // Please add your .env file and modify it according to your selection
     provider: 'buttondown',
   },
   comment: {
-    // If you want to use a commenting system other than giscus you have to add it to the
-    // content security policy in the `next.config.js` file.
     // Select a provider and use the environment variables associated to it
     // https://vercel.com/docs/environment-variables
-    provider: 'giscus', // supported providers: giscus, utterances, disqus
+    provider: 'giscus',
     giscusConfig: {
       // Visit the link below, and follow the steps in the 'configuration' section
       // https://giscus.app/
@@ -69,22 +66,6 @@ const siteMetadata = {
       // please provide a link below to your custom theme css file.
       // example: https://giscus.app/themes/custom_example.css
       themeURL: '',
-    },
-    utterancesConfig: {
-      // Visit the link below, and follow the steps in the 'configuration' section
-      // https://utteranc.es/
-      repo: process.env.NEXT_PUBLIC_UTTERANCES_REPO,
-      issueTerm: '', // supported options: pathname, url, title
-      label: '', // label (optional): Comment 💬
-      // theme example: github-light, github-dark, preferred-color-scheme
-      // github-dark-orange, icy-dark, dark-blue, photon-dark, boxy-light
-      theme: '',
-      // theme when dark mode
-      darkTheme: '',
-    },
-    disqusConfig: {
-      // https://help.disqus.com/en/articles/1717111-what-s-a-shortname
-      shortname: process.env.NEXT_PUBLIC_DISQUS_SHORTNAME,
     },
   },
 }
