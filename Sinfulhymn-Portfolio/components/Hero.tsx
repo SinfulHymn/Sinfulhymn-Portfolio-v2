@@ -7,10 +7,11 @@ const tagline = siteMetadata.description.split('\n\n')[0]
 
 const Hero = () => {
   return (
-    <section className="back-light dark:back-dark relative flex min-h-[85vh] flex-col justify-end overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-2/3 bg-gradient-to-t from-whiteBackground to-transparent dark:from-purpleBackground" />
+    <section className="grain vignette relative flex min-h-[85vh] flex-col justify-end overflow-hidden bg-whiteBackground dark:bg-purpleBackground">
+      <div className="back-light dark:back-dark absolute inset-0 z-[1]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-2/3 bg-gradient-to-t from-whiteBackground to-transparent dark:from-purpleBackground" />
       <div className="relative z-10 mx-auto w-full max-w-3xl px-4 pb-10 pt-24 sm:px-6 xl:max-w-4xl xl:px-0">
-        <h1 className="font-display text-4xl leading-none text-primaryText dark:text-white sm:text-5xl md:text-6xl">
+        <h1 className="font-display text-4xl leading-none text-primaryText dark:text-fgTextDark sm:text-5xl md:text-6xl">
           <span className="mr-1 text-secondaryAccent dark:text-secondaryAccentDark">$</span>
           {siteMetadata.headerTitle}
           <span className="cursor" aria-hidden />

@@ -1,74 +1,20 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
-const acidGreen = {
-  50: '#FAFFEE',
-  100: '#F1FFD1',
-  200: '#E2FFA3',
-  300: '#CFFF70',
-  400: '#A6FF4D',
-  500: '#8DF22F',
-  600: '#70D51D',
-  700: '#55A918',
-  800: '#447F1D',
-  900: '#37671D',
-  950: '#193408',
-}
-
-const pastelLime = {
-  50: '#FDFFF6',
-  100: '#F7FFE1',
-  200: '#EDFFC2',
-  300: '#DFFF9B',
-  400: '#D2FF7A',
-  500: '#BAF35D',
-  600: '#98D83D',
-  700: '#74AA2D',
-  800: '#5B8329',
-  900: '#4B6A27',
-  950: '#263A10',
-}
-
-const lavender = {
-  50: '#FCF8FF',
-  100: '#F6EAFF',
-  200: '#ECD3FF',
-  300: '#DFB5FF',
-  400: '#CE91FF',
-  500: '#B96AF1',
-  600: '#9B47D2',
-  700: '#7D35A9',
-  800: '#662F87',
-  900: '#54286E',
-  950: '#341343',
-}
-
-const blush = {
-  50: '#FFF5F8',
-  100: '#FFE7EF',
-  200: '#FFCDDD',
-  300: '#FFA9C4',
-  400: '#FF82A8',
-  500: '#F45D8D',
-  600: '#D93B70',
-  700: '#B72A5A',
-  800: '#95264D',
-  900: '#7D2545',
-  950: '#470F23',
-}
-
-const storm = {
-  50: '#F3F9FC',
-  100: '#E3F1F7',
-  200: '#C6E2EE',
-  300: '#9DCADE',
-  400: '#76B3D0',
-  500: '#5297BB',
-  600: '#3E789A',
-  700: '#355F79',
-  800: '#304F63',
-  900: '#2C4352',
-  950: '#182A36',
+// Contour rust — the single accent hue carrying the whole site, evoking
+// burnt-sienna topographic contour lines and trail-blaze orange.
+const rust = {
+  50: '#FDF3EC',
+  100: '#FAE3D3',
+  200: '#F3C4A4',
+  300: '#EA9F70',
+  400: '#DD7A46',
+  500: '#C65A28',
+  600: '#A8451C',
+  700: '#7F3316',
+  800: '#5E2611',
+  900: '#451B0C',
+  950: '#271006',
 }
 
 module.exports = {
@@ -109,64 +55,40 @@ module.exports = {
 
       colors: {
         primary: {
-          ...acidGreen,
-          DEFAULT: acidGreen[400],
+          ...rust,
+          DEFAULT: rust[500],
         },
 
-        lime: {
-          ...pastelLime,
-          DEFAULT: pastelLime[400],
-        },
+        // Light theme — warm stone/parchment
+        'background-light': '#EDE6D6',
+        whiteBackground: '#EDE6D6',
+        background: '#EDE6D6',
+        surface: '#F6F1E6',
+        surfaceAlt: '#E2D9C4',
 
-        lavender: {
-          ...lavender,
-          DEFAULT: lavender[400],
-        },
+        primaryText: '#221D16',
+        secondaryText: '#6E6353',
+        fgTextLight: '#221D16',
+        mutedLight: '#D9CFB8',
 
-        blush: {
-          ...blush,
-          DEFAULT: blush[400],
-        },
+        // Dark theme — near-black
+        purpleBackground: '#0B0A09',
+        backgroundDark: '#0B0A09',
+        bgDark: '#0B0A09',
+        surfaceDark: '#14120F',
+        surfaceAltDark: '#1D1A15',
 
-        storm: {
-          ...storm,
-          DEFAULT: storm[500],
-        },
+        fgTextDark: '#EEE7D9',
+        fgMutedDark: '#9C9284',
 
-        // Light theme
-        'background-light': '#F7F9F5',
-        whiteBackground: '#FFFFFF',
-        background: '#F7F9F5',
-        surface: '#FFFFFF',
-        surfaceAlt: '#EEF3EC',
+        borderDark: '#2B2820',
+        borderDarkSoft: '#221F19',
 
-        primaryText: '#162018',
-        secondaryText: '#667168',
-        fgTextLight: '#1A211C',
-        mutedLight: '#DCE5DB',
-
-        // Dark theme
-        purpleBackground: '#110F19',
-        backgroundDark: '#0B0F14',
-        bgDark: '#111A21',
-        surfaceDark: '#111A21',
-        surfaceAltDark: '#18242D',
-
-        fgTextDark: '#E5EEE8',
-        fgMutedDark: '#91A09A',
-
-        borderDark: '#26363E',
-        borderDarkSoft: '#1C2930',
-
-        // Brand accents
-        greenAccent: acidGreen[400],
-        greenAccentLines: pastelLime[400],
-
-        primaryAccent: '#FF2E9A',
-        secondaryAccent: lavender[500],
-        secondaryAccentDark: lavender[300],
-
-        neonblush: blush[400],
+        // Brand accent — one hue (rust), four values for default/hover x light/dark
+        primaryAccent: rust[600],
+        secondaryAccent: rust[700],
+        secondaryAccentDark: rust[400],
+        neonblush: rust[300],
 
         violet: {
           ...colors.violet,
@@ -175,7 +97,7 @@ module.exports = {
           1000: '#170D24',
         },
 
-        gray: colors.neutral,
+        gray: colors.stone,
       },
 
       typography: (theme) => ({
@@ -221,14 +143,14 @@ module.exports = {
             },
 
             pre: {
-              backgroundColor: theme('colors.storm.950'),
-              borderColor: theme('colors.storm.800'),
+              backgroundColor: theme('colors.gray.900'),
+              borderColor: theme('colors.gray.700'),
               borderWidth: '1px',
             },
 
             code: {
-              color: theme('colors.lavender.700'),
-              backgroundColor: theme('colors.lavender.50'),
+              color: theme('colors.primary.700'),
+              backgroundColor: theme('colors.gray.100'),
               paddingLeft: '4px',
               paddingRight: '4px',
               paddingTop: '2px',
@@ -254,7 +176,7 @@ module.exports = {
             },
 
             hr: {
-              borderColor: theme('colors.lime.300'),
+              borderColor: theme('colors.gray.300'),
             },
 
             'ol li::marker': {
@@ -290,11 +212,11 @@ module.exports = {
             '--tw-prose-quotes': theme('colors.gray.100'),
             '--tw-prose-quote-borders': theme('colors.primary.500'),
             '--tw-prose-captions': theme('colors.gray.400'),
-            '--tw-prose-code': theme('colors.lavender.300'),
+            '--tw-prose-code': theme('colors.gray.300'),
             '--tw-prose-pre-code': theme('colors.gray.200'),
-            '--tw-prose-pre-bg': theme('colors.storm.950'),
-            '--tw-prose-th-borders': theme('colors.storm.700'),
-            '--tw-prose-td-borders': theme('colors.storm.800'),
+            '--tw-prose-pre-bg': theme('colors.gray.900'),
+            '--tw-prose-th-borders': theme('colors.gray.600'),
+            '--tw-prose-td-borders': theme('colors.gray.700'),
 
             color: theme('colors.gray.300'),
 
@@ -336,13 +258,13 @@ module.exports = {
             },
 
             pre: {
-              backgroundColor: theme('colors.storm.950'),
-              borderColor: theme('colors.storm.800'),
+              backgroundColor: theme('colors.gray.900'),
+              borderColor: theme('colors.gray.700'),
               borderWidth: '1px',
             },
 
             code: {
-              color: theme('colors.lavender.300'),
+              color: theme('colors.gray.300'),
               backgroundColor: theme('colors.surfaceAltDark'),
             },
 
@@ -353,7 +275,7 @@ module.exports = {
             },
 
             hr: {
-              borderColor: theme('colors.greenAccentLines'),
+              borderColor: theme('colors.borderDark'),
             },
 
             'ol li::marker': {

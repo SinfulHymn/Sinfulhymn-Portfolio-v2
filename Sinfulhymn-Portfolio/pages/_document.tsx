@@ -19,19 +19,18 @@ class MyDocument extends Document {
           />
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
           <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" /> */}
-          <meta name="msapplication-TileColor" content="#000000" />
-          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
-          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
+          <meta name="msapplication-TileColor" content="#0B0A09" />
+          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#EDE6D6" />
+          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0A09" />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         </Head>
         <body
           className="
-          dark:bg-dark
           bg-whiteBackground
-          text-black
+          text-primaryText
           antialiased
           dark:bg-purpleBackground
-          dark:text-white
+          dark:text-fgTextDark
         "
         >
           <Main />
@@ -43,25 +42,3 @@ class MyDocument extends Document {
 }
 
 export default MyDocument
-
-// @media (prefers-color-scheme: light) {
-//   .back-light {
-//     background-color: #f1f1ef;
-//     opacity: 1;
-//     background-image: radial-gradient(#3b2875 0.75px, transparent 0.75px),
-//       radial-gradient(#3b2875 0.75px, #f1f1ef 0.75px);
-//     background-size: 30px 30px;
-//     background-position: 0 0, 15px 15px;
-//   }
-// }
-
-// @media (prefers-color-scheme: dark) {
-//   .back-dark {
-//     background-color: #21252e;
-//     opacity: 1;
-//     background-image: radial-gradient(#d722b3 0.75px, transparent 0.75px),
-//       radial-gradient(#d722b3 0.75px, #21252e 0.75px);
-//     background-size: 30px 50px;
-//     background-position: 0 0, 15px 15px;
-//   }
-// }

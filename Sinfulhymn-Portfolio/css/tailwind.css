@@ -9,13 +9,13 @@
  * the pattern color or brightness.
  */
 :root {
-  --topography-light-color: #ff2e9a;
-  --topography-dark-color: #a6ff4d;
+  --topography-light-color: #7f3316;
+  --topography-dark-color: #dd7a46;
 
   --topography-light-opacity: 0.85;
-  --topography-dark-opacity: 0.48;
+  --topography-dark-opacity: 0.5;
 
-  --topography-size: 640px;
+  --topography-size: 920px;
 }
 
 .task-list-item::before {
@@ -142,7 +142,6 @@ input:-webkit-autofill:focus {
  */
 .back-light,
 .back-dark {
-  position: relative;
   isolation: isolate;
 }
 
@@ -176,4 +175,44 @@ input:-webkit-autofill:focus {
 .dark .back-dark::before {
   background-color: var(--topography-dark-color);
   opacity: var(--topography-dark-opacity);
+}
+
+/*
+ * Grain — a fine film-grain texture laid over the hero so the topography
+ * reads as printed/atmospheric art rather than a flat digital pattern.
+ */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark .grain::after {
+  opacity: 0.09;
+}
+
+/*
+ * Vignette — darkens the hero's edges for depth, independent of the
+ * bottom gradient veil that keeps the wordmark legible.
+ */
+.vignette::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 30%,
+    transparent 45%,
+    rgba(34, 29, 22, 0.22) 100%
+  );
+}
+
+.dark .vignette::before {
+  background: radial-gradient(ellipse at 50% 30%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
 }

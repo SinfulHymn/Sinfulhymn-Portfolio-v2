@@ -25,7 +25,7 @@ interface AuthorLayoutProps {
 const ManSection = ({ label, children }: { label: string; children: ReactNode }) => (
   <div className="grid grid-cols-1 gap-2 sm:grid-cols-[8rem_1fr] sm:gap-6">
     <div className="apparatus text-secondaryAccent dark:text-secondaryAccentDark">{label}</div>
-    <div className="text-primaryText dark:text-white">{children}</div>
+    <div className="text-primaryText dark:text-fgTextDark">{children}</div>
   </div>
 )
 
@@ -54,7 +54,7 @@ export default function AuthorLayout({ children, frontMatter }: AuthorLayoutProp
 
           <div className="man-glow hairline space-y-8 rounded-b-md rounded-tr-md border bg-surface p-6 dark:bg-surfaceDark sm:p-10">
             <div className="hairline space-y-1 border-b pb-6 text-center">
-              <div className="font-display text-lg tracking-[0.1em] text-primaryText dark:text-white">
+              <div className="font-display text-lg tracking-[0.1em] text-primaryText dark:text-fgTextDark">
                 WHOAMI(1)
               </div>
               <div className="apparatus text-secondaryText dark:text-fgMutedDark">

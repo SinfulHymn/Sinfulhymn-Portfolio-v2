@@ -35,7 +35,7 @@ const Card = ({ title, description, imgSrc, href, repo, date, tags }: CardProps)
         />
       ))}
     <div className="hairline mt-3 border-t pt-3">
-      <h2 className="font-display text-xl leading-tight text-primaryText dark:text-white">
+      <h2 className="font-display text-xl leading-tight text-primaryText dark:text-fgTextDark">
         {href ? (
           <Link href={href} aria-label={`Link to ${title}`}>
             {title}
@@ -50,7 +50,7 @@ const Card = ({ title, description, imgSrc, href, repo, date, tags }: CardProps)
           <Tag key={tag} text={tag} />
         ))}
       </div>
-      <p className="prose mt-2 max-w-none text-primaryText dark:text-white">{description}</p>
+      <p className="prose mt-2 max-w-none text-primaryText dark:text-fgTextDark">{description}</p>
       {href && (
         <div className="mt-3 flex flex-row gap-4">
           <Link

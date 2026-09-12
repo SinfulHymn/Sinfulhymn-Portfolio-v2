@@ -61,7 +61,7 @@ export default function PostLayout({
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/blog/${prev.slug}`}
-                      className="dark:hover:text-primary-400·text-primaryAccent·hover:text-secondaryAccent"
+                      className="text-secondaryAccent hover:text-primaryAccent dark:hover:text-neonblush"
                     >
                       &larr; {prev.title as string}
                     </Link>
@@ -71,7 +71,7 @@ export default function PostLayout({
                   <div className="pt-4 xl:pt-8">
                     <Link
                       href={`/blog/${next.slug}`}
-                      className="dark:hover:text-primary-400·text-primaryAccent·hover:text-secondaryAccent"
+                      className="text-secondaryAccent hover:text-primaryAccent dark:hover:text-neonblush"
                     >
                       {next.title as string} &rarr;
                     </Link>
