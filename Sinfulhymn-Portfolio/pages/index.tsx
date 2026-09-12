@@ -4,60 +4,22 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { getAllFilesFrontMatter } from '@/lib/mdx'
 import formatDate from '@/lib/utils/formatDate'
-import projectsData from '@/data/projectsData'
-import Card from '@/components/Card'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import type { Frontmatter } from '@/lib/mdx'
-import type { Project } from '@/data/projectsData'
 
 const MAX_DISPLAY = 2
 
 export const getStaticProps: GetStaticProps<{
   posts: Frontmatter[]
-  projects: Project[]
 }> = async () => {
   const posts = await getAllFilesFrontMatter('blog')
-  const projects = projectsData
-  return { props: { posts, projects } }
+  return { props: { posts } }
 }
 
-export default function Home({ posts, projects }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
-
-      <section className="hairline space-y-6 border-b pb-10">
-        <div className="flex items-center justify-between">
-          <h2 className="apparatus text-secondaryText dark:text-fgMutedDark">Recent Projects</h2>
-          {projects.length > MAX_DISPLAY && (
-            <Link
-              href="/projects"
-              className="nav-link apparatus text-secondaryAccent hover:text-primaryAccent dark:text-secondaryAccentDark dark:hover:text-neonblush"
-            >
-              All Projects &rarr;
-            </Link>
-          )}
-        </div>
-        {!projects.length && (
-          <div className="apparatus text-secondaryText dark:text-fgMutedDark">
-            Under construction.
-          </div>
-        )}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          {projects.slice(0, 4).map((d) => (
-            <Card
-              key={d.title}
-              title={d.title}
-              description={d.description}
-              imgSrc={d.imgSrc}
-              href={d.href}
-              repo={d.repo}
-              date={d.date}
-              tags={d.tags}
-            />
-          ))}
-        </div>
-      </section>
 
       <section className="space-y-6 pt-10">
         <h2 className="apparatus text-secondaryText dark:text-fgMutedDark">Recent Posts</h2>
