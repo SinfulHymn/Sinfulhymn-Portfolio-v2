@@ -7,11 +7,14 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app;
   style-src 'self' 'unsafe-inline';
-  img-src * blob: data:;
+  img-src 'self' data:;
   media-src 'none';
-  connect-src *;
+  connect-src 'self' giscus.app;
   font-src 'self';
-  frame-src giscus.app
+  frame-src giscus.app;
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self'
 `
 
 const securityHeaders = [

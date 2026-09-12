@@ -44,7 +44,11 @@ export const getStaticProps: GetStaticProps<BlogPostProps, SlugParams> = async (
   const authorList = (post.frontMatter.authors as string[]) || ['default']
   const authorPromise = authorList.map(async (author) => {
     const authorResults = await getFileBySlug('authors', [author])
-    return authorResults.frontMatter
+    // Next.js embeds all getStaticProps return values verbatim in the
+    // page's __NEXT_DATA__ JSON — strip the raw email so it can't leak
+    // into every blog post's page source for scrapers.
+    const { email: _email, ...redactedFrontMatter } = authorResults.frontMatter
+    return redactedFrontMatter
   })
   const authorDetails = await Promise.all(authorPromise)
 

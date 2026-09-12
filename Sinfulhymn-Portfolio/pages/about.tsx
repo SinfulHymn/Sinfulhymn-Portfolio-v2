@@ -6,7 +6,15 @@ const DEFAULT_LAYOUT = 'AuthorLayout'
 
 export const getStaticProps: GetStaticProps = async () => {
   const authorDetails = await getFileBySlug('authors', ['default'])
-  return { props: { authorDetails } }
+  // Next.js embeds all getStaticProps return values verbatim in the
+  // page's __NEXT_DATA__ JSON, regardless of what the UI renders — strip
+  // the raw email here so it can't leak into page source for scrapers.
+  const { email: _email, ...redactedFrontMatter } = authorDetails.frontMatter
+  return {
+    props: {
+      authorDetails: { ...authorDetails, frontMatter: redactedFrontMatter },
+    },
+  }
 }
 
 export default function About({ authorDetails }: InferGetStaticPropsType<typeof getStaticProps>) {

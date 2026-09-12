@@ -44,12 +44,12 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => {
                 {siteMetadata.headerTitle}
               </Link>
               <div className="flex items-center gap-5">
-                <nav className="hidden gap-5 sm:flex">
+                <nav className="hidden gap-8 sm:flex">
                   {headerNavLinks.map((link) => (
                     <Link
                       key={link.title}
                       href={link.href}
-                      className="nav-link apparatus text-primaryText dark:text-fgTextDark"
+                      className="nav-link nav-primary text-primaryText dark:text-fgTextDark"
                     >
                       {link.title}
                     </Link>

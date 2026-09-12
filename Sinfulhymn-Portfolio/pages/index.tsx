@@ -26,7 +26,7 @@ export default function Home({ posts, projects }: InferGetStaticPropsType<typeof
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
 
-      <section className="hairline space-y-6 border-b pb-10">
+      {/* <section className="hairline space-y-6 border-b pb-10">
         <div className="flex items-center justify-between">
           <h2 className="apparatus text-secondaryText dark:text-fgMutedDark">Recent Projects</h2>
           {projects.length > MAX_DISPLAY && (
@@ -57,9 +57,9 @@ export default function Home({ posts, projects }: InferGetStaticPropsType<typeof
             />
           ))}
         </div>
-      </section>
+      </section> */}
 
-      <section className="space-y-6 pt-10">
+      {/* <section className="space-y-6 pt-10">
         <h2 className="apparatus text-secondaryText dark:text-fgMutedDark">Recent Posts</h2>
         {!posts.length && (
           <div className="apparatus text-secondaryText dark:text-fgMutedDark">
@@ -111,7 +111,7 @@ export default function Home({ posts, projects }: InferGetStaticPropsType<typeof
             </Link>
           </div>
         )}
-      </section>
+      </section> */}
     </>
   )
 }

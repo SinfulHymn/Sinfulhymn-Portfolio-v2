@@ -1,5 +1,6 @@
 import SocialIcon from '@/components/social-icons'
 import Image from '@/components/Image'
+import ObfuscatedEmail from '@/components/ObfuscatedEmail'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import type { Frontmatter } from '@/lib/mdx'
@@ -29,7 +30,7 @@ const ManSection = ({ label, children }: { label: string; children: ReactNode })
   </div>
 )
 
-const Opt = ({ name, desc }: { name: string; desc: string }) => (
+const Opt = ({ name, desc }: { name: string; desc: ReactNode }) => (
   <div className="grid grid-cols-1 gap-1 font-mono text-sm sm:grid-cols-[10rem_1fr] sm:gap-4">
     <span className="text-secondaryAccent dark:text-secondaryAccentDark">{name}</span>
     <span className="break-all text-secondaryText dark:text-fgMutedDark">{desc}</span>
@@ -39,8 +40,9 @@ const Opt = ({ name, desc }: { name: string; desc: string }) => (
 const stripProtocol = (url: string) => url.replace(/^https?:\/\//, '').replace(/\/$/, '')
 
 export default function AuthorLayout({ children, frontMatter }: AuthorLayoutProps) {
-  const { name, avatar, occupation, company, email, linkedin, github } = frontMatter
+  const { name, avatar, occupation, company, linkedin, github } = frontMatter
   const handle = (siteMetadata.headerTitle as string).toLowerCase()
+  const [emailUser, emailDomain] = (siteMetadata.email as string).split('@')
 
   return (
     <>
@@ -90,7 +92,10 @@ export default function AuthorLayout({ children, frontMatter }: AuthorLayoutProp
             <div className="hairline space-y-3 border-t pt-6">
               <div className="apparatus text-secondaryText dark:text-fgMutedDark">Options</div>
               <div className="space-y-2">
-                {email && <Opt name="--contact" desc={email} />}
+                <Opt
+                  name="--contact"
+                  desc={<ObfuscatedEmail user={emailUser} domain={emailDomain} />}
+                />
                 {github && <Opt name="--github" desc={stripProtocol(github)} />}
                 {linkedin && <Opt name="--linkedin" desc={stripProtocol(linkedin)} />}
               </div>
@@ -98,7 +103,6 @@ export default function AuthorLayout({ children, frontMatter }: AuthorLayoutProp
 
             <div className="hairline flex items-center justify-between border-t pt-6">
               <div className="flex gap-4">
-                <SocialIcon kind="mail" href={`mailto:${email}`} />
                 <SocialIcon kind="linkedin" href={linkedin} />
                 <SocialIcon kind="github" href={github} />
               </div>

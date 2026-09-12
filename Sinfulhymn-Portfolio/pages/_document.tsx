@@ -19,9 +19,9 @@ class MyDocument extends Document {
           />
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
           <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" /> */}
-          <meta name="msapplication-TileColor" content="#0B0A09" />
-          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#EDE6D6" />
-          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0A09" />
+          <meta name="msapplication-TileColor" content="#110F19" />
+          <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+          <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#110F19" />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         </Head>
         <body

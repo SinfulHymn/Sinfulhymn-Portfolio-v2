@@ -4,9 +4,10 @@ export interface NavLink {
 }
 
 const headerNavLinks: NavLink[] = [
-  { href: '/about', title: 'About' },
+  { href: '/about', title: 'Whoami' },
   { href: '/blog', title: 'Blog' },
   { href: '/projects', title: 'Projects' },
+  { href: '/photos', title: 'Photos' },
 ]
 
 export default headerNavLinks

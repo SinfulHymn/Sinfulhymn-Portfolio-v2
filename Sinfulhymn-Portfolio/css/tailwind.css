@@ -9,11 +9,11 @@
  * the pattern color or brightness.
  */
 :root {
-  --topography-light-color: #7f3316;
-  --topography-dark-color: #dd7a46;
+  --topography-light-color: #9e1c5f;
+  --topography-dark-color: #a6ff4d;
 
-  --topography-light-opacity: 0.85;
-  --topography-dark-opacity: 0.5;
+  --topography-light-opacity: 0.92;
+  --topography-dark-opacity: 0.48;
 
   --topography-size: 920px;
 }
@@ -40,6 +40,14 @@
  */
 .apparatus {
   @apply font-mono text-[11px] uppercase tracking-[0.18em];
+}
+
+/*
+ * Nav primary — the site's main nav links (hero + sticky header). Same
+ * family as .apparatus but stretched out wider, sig2void-style.
+ */
+.nav-primary {
+  @apply font-mono text-[11px] uppercase tracking-[0.3em];
 }
 
 /*

@@ -15,26 +15,32 @@ const ThemeSwitch = () => {
       aria-pressed={isDark}
       type="button"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="inline-flex items-center gap-1.5 rounded-full border border-mutedLight px-1.5 py-1 transition-colors hover:border-secondaryAccent dark:border-borderDark dark:hover:border-secondaryAccentDark"
+      className="relative inline-flex h-8 w-[56px] flex-shrink-0 items-center rounded-full border-2 border-secondaryAccent/60 bg-mutedLight px-0.5 transition-colors hover:border-secondaryAccent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondaryAccent focus-visible:ring-offset-2 focus-visible:ring-offset-whiteBackground dark:border-secondaryAccentDark/60 dark:bg-purpleBackground dark:hover:border-secondaryAccentDark dark:focus-visible:ring-secondaryAccentDark dark:focus-visible:ring-offset-purpleBackground"
     >
       <span
-        className={`text-[10px] leading-none ${isDark ? 'opacity-30' : 'opacity-100'}`}
-        aria-hidden
+        className={`flex h-6 w-6 items-center justify-center rounded-full bg-secondaryAccent text-whiteBackground shadow-md transition-transform duration-200 ease-out dark:bg-secondaryAccentDark dark:text-purpleBackground ${
+          isDark ? 'translate-x-[24px]' : 'translate-x-0'
+        }`}
       >
-        ☀
-      </span>
-      <span className="relative h-[11px] w-[22px] flex-shrink-0 rounded-full border border-mutedLight dark:border-borderDark">
-        <span
-          className={`absolute top-1/2 h-[7px] w-[7px] -translate-y-1/2 rounded-full bg-secondaryAccent transition-all dark:bg-secondaryAccentDark ${
-            isDark ? 'left-[12px]' : 'left-[2px]'
-          }`}
-        />
-      </span>
-      <span
-        className={`text-[10px] leading-none ${isDark ? 'opacity-100' : 'opacity-30'}`}
-        aria-hidden
-      >
-        ☽
+        {isDark ? (
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+            <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 1020.354 15.354z" />
+          </svg>
+        ) : (
+          <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" fill="currentColor" stroke="none" />
+            <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+        )}
       </span>
     </button>
   )
